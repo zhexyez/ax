@@ -1,0 +1,13 @@
+/* Data.json */
+{
+	"MainBox" : {
+		"id"		:		"MainBox",
+		"type"		:		"div",
+		"parent"	:		"GLOBAL"
+	},
+	"Logo" : {
+		"id"		:		"Logo",
+		"type"		:		"img",
+		"parent"	:		"MainBox"
+	}
+}

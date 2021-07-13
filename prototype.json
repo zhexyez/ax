@@ -1,0 +1,15 @@
+/* Prototypes */
+{
+	"block" : {
+		"id"		:		"string/null",
+		"class"		:		"string/null",
+		"type"		:		"string",
+		"parent"	:		"string/null",
+		"events"	:		"array_of_strings/null",
+		"offset"	:		"array_of_strings/null"
+	},
+	"event" : {
+		"name"		:		"string",
+		"duration"	:		"integer/null"
+	}
+}
