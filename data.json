@@ -8,5 +8,8 @@
 		"id"		:		"Logo",
 		"type"		:		"img",
 		"parent"	:		"MainBox"
+	},
+	"Serious" : {
+		"name"		:		"wolf"
 	}
 }
