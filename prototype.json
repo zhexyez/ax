@@ -5,6 +5,7 @@
 		"type"		:		"string",
 		"parent"	:		"string/null",
 		"events"	:		"array_of_strings/null",
+		"styles"	:		"auto",
 		"offset"	:		"array_of_strings/null"
 	},
 	"event" : {

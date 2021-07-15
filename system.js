@@ -1,3 +1,4 @@
+/* System */
 /* Parsing */
 var fs = require("fs")
 var prototype = JSON.parse(fs.readFileSync("/ax/prototype.json", "utf-8"))
@@ -81,6 +82,4 @@ for (let i = 0; i < data_headers.length; i++)
 fs.writeFile("system_out.json", concat_all, function (err) {
 	if (err) return console.log(err)
   console.log("[__system_out_success_]")
-	var leak = JSON.parse(fs.readFileSync("/ax/system_out.json", "utf-8"))
-	console.log(leak)
 })
