@@ -1,17 +1,58 @@
 /* Compute */
-/* Loading */
+/* Parsing */
 var fs = require("fs")
 var data = JSON.parse(fs.readFileSync("/ax/data.json", "utf-8"))
 var system = JSON.parse(fs.readFileSync("/ax/system_out.json", "utf-8"))
+console.log("[____compute_loaded___]")
 
-/* Templates */
-let Templates = []
-let get_template = (type) => {
-	return "document.createElement(\"" + type + "\")"
+/* Objects Parsing */
+let ElementsArray = []
+let NamesArray = []
+let get_element = (type, key) => {
+	let GetElementArray = []
+	let Element = "let " + data[key]["id"] + " = document.createElement(\"" + type + "\")"
+	GetElementArray.push(Element)
+	let inner_string = (field) => { return "\"" + field + "\"" }
+	let Attributes = (fcode) => {
+		return ".setAttribute(" + inner_string(fcode) + "," + inner_string(data[key][fcode]) + ")"
+	}
+	for (let field in data[key])
+	{
+		if (field != "type") {
+			GetElementArray.push(data[key]["id"] + Attributes(field))
+		}
+	}
+	if (data[key]["parent"] != "GLOBAL") {
+		GetElementArray.push(data[key]["parent"] + ".appendChild(" + data[key]["id"] + ")")
+	} else {
+		GetElementArray.push("document.body.appendChild(" + data[key]["id"] + ")")
+	}
+	return GetElementArray
 }
 for (let key in data)
 {
 	if ("type" in data[key]) {
-		console.log(get_template(data[key]["type"]))
+		ElementsArray.push(get_element(data[key]["type"], key))
+		NamesArray.push(key)
 	}
 }
+console.log("[____objects_parsed___]")
+
+/* Output */
+let get_output_line = () => {
+	let OneLiner = {}
+	/*Object.entries(array).forEach(([key,value]) => { OneLiner[key] = value })*/
+	for (let i = 0; i < NamesArray.length; i++)
+	{
+		let pair = { [NamesArray[i]] : ElementsArray[i] }
+		OneLiner = { ...OneLiner, ...pair }
+	}
+	return OneLiner
+}
+
+let ObjectAsJSON = JSON.stringify(get_output_line())
+
+fs.writeFile("compute_out.json", ObjectAsJSON, function (err) {
+	if (err) return console.log(err)
+	console.log("[_compute_out_success_]")
+})

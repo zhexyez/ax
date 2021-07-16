@@ -14,24 +14,40 @@ let block_prototype = get_prototype("block")
 let event_prototype = get_prototype("event")
 
 /* Check integrity by prototype */
+let UNREPEATED_ITEMS = []
 let integrity = (data, block_prototype, event_prototype) => {
 	let flag = true
 	for (let key in data)
 	{
+		if (UNREPEATED_ITEMS.length > 0) {
+			if (UNREPEATED_ITEMS.includes(key) || UNREPEATED_ITEMS.includes(data[key]["id"])) {
+				console.log("<!> repeated key or id in key " + key + " with id " + data[key]["id"])
+				flag = false
+				return flag
+			} else {
+				UNREPEATED_ITEMS.push(key)
+				UNREPEATED_ITEMS.push(data[key]["id"])
+			}
+		} else {
+			UNREPEATED_ITEMS.push(key)
+			UNREPEATED_ITEMS.push(data[key]["id"])
+		}
 		if ("id" in data[key] && !("name" in data[key])) {
 			for (let field in data[key])
 			{
 				if (!(field in block_prototype)) {
-					console.log("bad parameter in " + key + " block declaration: " + field)
+					console.log("<!> bad parameter in " + key + " block declaration: " + field)
 					flag = false
+					return flag
 				}
 			}
 		} else if ("name" in data[key] && !("id" in data[key])) {
 			for (let field in data[key])
 			{
 				if (!(field in event_prototype)) {
-					console.log("bad parameter in " + key + " event declaration: " + field)
+					console.log("<!> bad parameter in " + key + " event declaration: " + field)
 					flag = false
+					return flag
 				}
 			}
 		} else {
