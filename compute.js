@@ -24,8 +24,18 @@ let get_element = (type, key) => {
 			GetElementArray.push(data[key]["id"] + Attributes(field))
 		}
 	}
-	if (data[key]["parent"] != "GLOBAL") {
-		GetElementArray.push(data[key]["parent"] + ".appendChild(" + data[key]["id"] + ")")
+	if ("parent" in data[key]) {
+		if (data[key]["parent"] != "GLOBAL") {
+			if (NamesArray.includes(data[key]["parent"])) {
+				GetElementArray.push(data[key]["parent"] + ".appendChild(" + data[key]["id"] + ")")
+			} else {
+				console.log("<!> there is no parent " + data[key]["parent"])
+				console.log(key + "\'s been upcast to body")
+				GetElementArray.push("document.body.appendChild(" + data[key]["id"] + ")")
+			}
+		} else {
+			GetElementArray.push("document.body.appendChild(" + data[key]["id"] + ")")
+		}
 	} else {
 		GetElementArray.push("document.body.appendChild(" + data[key]["id"] + ")")
 	}
@@ -33,7 +43,7 @@ let get_element = (type, key) => {
 }
 for (let key in data)
 {
-	if ("type" in data[key]) {
+	if ("id" in data[key] && !("name" in data[key])) {
 		ElementsArray.push(get_element(data[key]["type"], key))
 		NamesArray.push(key)
 	}

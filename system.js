@@ -81,6 +81,10 @@ let integrity = (data, block_prototype, event_prototype) => {
 	}
 	return flag
 }
+if (Object.keys(data).length == 0) {
+	console.log("<!> data is empty")
+	return
+}
 if (integrity(data, block_prototype, event_prototype)) 
 {
 	console.log("[__integrity_checked__]")

@@ -11,7 +11,8 @@
 	},
 	"Pinguin" : {
 		"id"		:		"Berry",
-		"type"		:		"p"
+		"type"		:		"p",
+		"parent"	:		"Crawler"
 	},
 	"Serious" : {
 		"name"		:		"wolf"
