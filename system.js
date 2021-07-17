@@ -50,6 +50,18 @@ let integrity = (data, block_prototype, event_prototype) => {
 			}
 			for (let field in data[key])
 			{
+				if (data[key][field].length == 0) {
+					/* Check if field is of 0 length */
+					console.log("<!> length must be at least 1 char in " + field + " in " + key)
+					flag = false
+					return flag
+				}
+				if (!(isNaN(data[key][field][0]))) {
+					/* Check if begins with char */
+					console.log("<!> must begin with char type in " + field + " in " + key)
+					flag = false
+					return flag
+				}
 				if (!(field in block_prototype)) {
 					/* Check if field presented in ptorotype */
 					console.log("<!> bad parameter in " + key + " block declaration: " + field)
