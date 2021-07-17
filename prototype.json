@@ -11,5 +11,9 @@
 	"event" : {
 		"name"		:		"string",
 		"duration"	:		"integer/null"
+	},
+	"img" : {
+		"src"		:		"string",
+		"alt"		:		"string"
 	}
 }

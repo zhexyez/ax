@@ -9,6 +9,10 @@
 		"type"		:		"img",
 		"parent"	:		"MainBox"
 	},
+	"Pinguin" : {
+		"id"		:		"Berry",
+		"type"		:		"p"
+	},
 	"Serious" : {
 		"name"		:		"wolf"
 	}

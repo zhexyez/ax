@@ -3,6 +3,7 @@
 var fs = require("fs")
 var prototype = JSON.parse(fs.readFileSync("/ax/prototype.json", "utf-8"))
 var data = JSON.parse(fs.readFileSync("/ax/data.json", "utf-8"))
+var block_types = JSON.parse(fs.readFileSync("/ax/types_lib.json", "utf-8"))
 console.log("[________loaded_______]")
 
 /* Fetching prototypes */
@@ -20,6 +21,7 @@ let integrity = (data, block_prototype, event_prototype) => {
 	for (let key in data)
 	{
 		if (UNREPEATED_ITEMS.length > 0) {
+			/* Check for repeating items */
 			if (UNREPEATED_ITEMS.includes(key) || UNREPEATED_ITEMS.includes(data[key]["id"])) {
 				console.log("<!> repeated key or id in key " + key + " with id " + data[key]["id"])
 				flag = false
@@ -33,15 +35,37 @@ let integrity = (data, block_prototype, event_prototype) => {
 			UNREPEATED_ITEMS.push(data[key]["id"])
 		}
 		if ("id" in data[key] && !("name" in data[key])) {
+			/* Check if block */
+			if (Object.keys(data[key]).length <= 1) {
+				/* Check if more than 1 parameter presented */
+				console.log("<!> invalid length of object in " + key)
+				flag = false
+				return flag
+			}
+			if (!("type" in data[key])) {
+				/* Check if type presented in data[key] */
+				console.log("<!> no type presented in " + key)
+				flag = false
+				return flag
+			}
 			for (let field in data[key])
 			{
 				if (!(field in block_prototype)) {
+					/* Check if field presented in ptorotype */
 					console.log("<!> bad parameter in " + key + " block declaration: " + field)
 					flag = false
 					return flag
+				} else {
+					if (field == "type" && !(data[key][field] in block_types["block_types"])) {
+						/* Check if type presented in prototype */
+						console.log("<!> bad type in " + key + " block declaration: " + data[key][field])
+						flag = false
+						return flag
+					}
 				}
 			}
 		} else if ("name" in data[key] && !("id" in data[key])) {
+			/* Check if event */
 			for (let field in data[key])
 			{
 				if (!(field in event_prototype)) {

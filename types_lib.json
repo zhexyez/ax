@@ -1,0 +1,9 @@
+{
+	"block_types" : {
+		"div"		:	"true",
+		"p"			:	"true",
+		"img"		:	"true",
+		"button"	:	"true",
+		"a"			:	"true"
+	}
+}

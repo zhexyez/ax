@@ -3,6 +3,8 @@
 var fs = require("fs")
 var data = JSON.parse(fs.readFileSync("/ax/data.json", "utf-8"))
 var system = JSON.parse(fs.readFileSync("/ax/system_out.json", "utf-8"))
+var types_lib = JSON.parse(fs.readFileSync("/ax/types_lib.json", "utf-8"))
+var prototype = JSON.parse(fs.readFileSync("/ax/prototype.json", "utf-8"))
 console.log("[____compute_loaded___]")
 
 /* Objects Parsing */
@@ -41,7 +43,6 @@ console.log("[____objects_parsed___]")
 /* Output */
 let get_output_line = () => {
 	let OneLiner = {}
-	/*Object.entries(array).forEach(([key,value]) => { OneLiner[key] = value })*/
 	for (let i = 0; i < NamesArray.length; i++)
 	{
 		let pair = { [NamesArray[i]] : ElementsArray[i] }
