@@ -2,7 +2,6 @@
 /* Parsing */
 var fs = require("fs")
 var data = JSON.parse(fs.readFileSync("/ax/data.json", "utf-8"))
-var system = JSON.parse(fs.readFileSync("/ax/system_out.json", "utf-8"))
 var types_lib = JSON.parse(fs.readFileSync("/ax/types_lib.json", "utf-8"))
 var prototype = JSON.parse(fs.readFileSync("/ax/prototype.json", "utf-8"))
 console.log("[____compute_loaded___]")
@@ -20,8 +19,8 @@ let get_element = (type, key) => {
 	}
 	for (let field in data[key])
 	{
-		if (field != "type") {
-			GetElementArray.push(data[key]["id"] + Attributes(field))
+		if (field != "type" && field != "parent" && field != "styles") {
+			GetElementArray.push(data[key][field] + Attributes(field))
 		}
 	}
 	if ("parent" in data[key]) {

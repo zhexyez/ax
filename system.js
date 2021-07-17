@@ -100,12 +100,14 @@ if (Object.keys(data).length == 0) {
 if (integrity(data, block_prototype, event_prototype)) 
 {
 	console.log("[__integrity_checked__]")
+	console.log("[____everything_ok____]")
 } else {
 	console.log("[____bad_integrity____]")
 	return
 }
 
 /* Enumerate data */
+/*
 let data_headers = []
 let enumerate = 1
 for (let key in data)
@@ -139,3 +141,4 @@ fs.writeFile("system_out.json", concat_all, function (err) {
 	if (err) return console.log(err)
   console.log("[__system_out_success_]")
 })
+*/
