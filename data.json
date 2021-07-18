@@ -3,7 +3,7 @@
 		"id"		:		"MainBox",
 		"type"		:		"div",
 		"parent"	:		"GLOBAL",
-		"events"	:		0
+		"events"	:		"string"
 	},
 	"Logo" : {
 		"id"		:		"Logo",

@@ -80,19 +80,34 @@ let integrity = (data, block_prototype, event_prototype) => {
 						flag = false
 					} else if (!(field in block_prototype) || !(field in block_types[type])) {
 						/* Check if value of field matches it's prototype value */
-						/* !!! REVIEW ASAP !!! */
 						let compare_types = (value_of_data_field, value_of_picked_field) => {
 							let compare_types_FLAG = false
 							for (let each in value_of_picked_field)
-							{
-								if (typeof(value_of_picked_field[each]) == typeof(value_of_data_field)) {
-									/* If types are equal */
-									compare_types_FLAG = true
-									return compare_types_FLAG
-								}
-							}
-							console.log("<!> unmatching value prototype in " + key + " => " + field)
-							return compare_types_FLAG
+    					{
+								let is_VODF_Array = Array.isArray(value_of_data_field), is_VOPFe_Array = Array.isArray(value_of_picked_field[each])
+								if (is_VODF_Array || is_VOPFe_Array) {
+									/* Check if one of is of Array type */
+          				if (is_VODF_Array && is_VOPFe_Array) {
+          					/* Check if both are of Array type */
+          					for (let every in value_of_data_field)
+          					{
+          						if (typeof(value_of_data_field[every]) != "string") {
+          							console.log("<!> all values in array must be of string type in " + key + " => " + field + " ..." + typeof(value_of_data_field[every]))
+          							compare_types_FLAG = false
+            						return compare_types_FLAG
+          						}
+          					}
+          					compare_types_FLAG = true
+            				return compare_types_FLAG
+            			}
+        				} else if (typeof(value_of_data_field) == typeof(value_of_picked_field[each])) {
+        					/* Check if types matching */
+            			compare_types_FLAG = true
+            			return compare_types_FLAG
+        				}
+    					}
+    					console.log("<!> unmatching value prototype in " + key + " => " + field + " ..." + typeof(value_of_data_field))
+    					return compare_types_FLAG
 						}
 						if (field in block_prototype) {
 							flag = compare_types(data[key][field], block_prototype[field])

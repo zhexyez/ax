@@ -4,7 +4,7 @@
 		"class"		:		["string"],
 		"type"		:		["string"],
 		"parent"	:		["string"],
-		"events"	:		["string",[],0],
+		"events"	:		["string",[]],
 		"styles"	:		["string"],
 		"offset"	:		["string",[]]
 	},
