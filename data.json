@@ -2,12 +2,15 @@
 	"MainBox" : {
 		"id"		:		"MainBox",
 		"type"		:		"div",
-		"parent"	:		"GLOBAL"
+		"parent"	:		"GLOBAL",
+		"events"	:		0
 	},
 	"Logo" : {
 		"id"		:		"Logo",
 		"type"		:		"img",
-		"parent"	:		"MainBox"
+		"parent"	:		"MainBox",
+		"src"		:		"/yomama.png",
+		"alt"		:		"fatboiii"
 	},
 	"Pinguin" : {
 		"id"		:		"Berry",

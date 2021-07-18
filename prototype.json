@@ -1,15 +1,15 @@
 {
 	"block" : {
-		"id"		:		"string/null",
-		"class"		:		"string/null",
-		"type"		:		"string",
-		"parent"	:		"string/null",
-		"events"	:		"array_of_strings/null",
-		"styles"	:		"auto",
-		"offset"	:		"array_of_strings/null"
+		"id"		:		["string"],
+		"class"		:		["string"],
+		"type"		:		["string"],
+		"parent"	:		["string"],
+		"events"	:		["string",[],0],
+		"styles"	:		["string"],
+		"offset"	:		["string",[]]
 	},
 	"event" : {
-		"name"		:		"string",
-		"duration"	:		"integer/null"
+		"name"		:		["string"],
+		"duration"	:		["number"]
 	}
 }

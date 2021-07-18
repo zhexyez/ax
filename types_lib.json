@@ -1,13 +1,25 @@
 {
 	"block_types" : {
-		"div"		:	"true",
-		"p"			:	"true",
-		"img"		:	"true",
-		"button"	:	"true",
-		"a"			:	"true"
+		"div"		:	true,
+		"p"			:	true,
+		"img"		:	true,
+		"button"	:	true,
+		"a"			:	true,
+		"script"	:	true
+	},
+	"div" : {
+		"name"		:		["string"]
 	},
 	"img" : {
-		"src"		:		"string",
-		"alt"		:		"string"
+		"src"		:		["string"],
+		"alt"		:		["string"]
+	},
+	"p" : {
+		"name"		:		["string"]
+	},
+	"script" : {
+		"src"		:		["string"],
+		"defer"		:		null,
+		"async"		:		null
 	}
 }
